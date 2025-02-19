@@ -2,18 +2,18 @@ let firstNum = 0;
 let secondNum = 0;
 let operator = "";
 
-function add(num1, num2) {
-  return num1 + num2;
+function add(numOne, numTwo) {
+  return numOne + numTwo;
 }
 
-function subtract(num1, num2) {
-  return num1 - num2;
+function subtract(numOne, numTwo) {
+  return numOne - numTwo;
 }
 
-function multiply(num1, num2) {
-  return num1 * num2;
+function multiply(numOne, numTwo) {
+  return numOne * numTwo;
 }
 
-function divide(num1, num2) {
-  return num1 / num2;
+function divide(numOne, numTwo) {
+  return numOne / numTwo;
 }
