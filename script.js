@@ -25,3 +25,9 @@ function operate(operator, numOne = 0, numTwo = 0) {
   if (operator === "×") return multiply(numOne, numTwo);
   if (operator === "÷") return divide(numOne, numTwo);
 }
+
+function updateCalcDisplay(...args) {
+  const calcDisplay = document.querySelector(".display-container");
+  const displayContent = args.join(" ");
+  calcDisplay.insertAdjacentHTML("beforeend", displayContent);
+}
