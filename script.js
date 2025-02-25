@@ -31,3 +31,8 @@ function updateCalcDisplay(...args) {
   const displayContent = args.join(" ");
   calcDisplay.insertAdjacentHTML("beforeend", displayContent);
 }
+
+function clearCalcDisplay() {
+  const calcDisplay = document.querySelector(".display-container");
+  calcDisplay.innerHTML = "";
+}
