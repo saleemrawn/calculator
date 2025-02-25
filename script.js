@@ -1,6 +1,7 @@
-let firstNum = 0;
-let secondNum = 0;
+let firstNum = "";
+let secondNum = "";
 let operator = "";
+let total = 0;
 
 function add(numOne, numTwo) {
   return numOne + numTwo;
@@ -20,7 +21,7 @@ function divide(numOne, numTwo) {
 
 function operate(operator, numOne = 0, numTwo = 0) {
   if (operator === "+") return add(numOne, numTwo);
-  if (operator === "-") return subtract(numOne, numTwo);
-  if (operator === "*") return multiply(numOne, numTwo);
-  if (operator === "/") return divide(numOne, numTwo);
+  if (operator === "–") return subtract(numOne, numTwo);
+  if (operator === "×") return multiply(numOne, numTwo);
+  if (operator === "÷") return divide(numOne, numTwo);
 }
