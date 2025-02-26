@@ -1,5 +1,12 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+
+p,
+button,
+.display-container {
+  font-size: 1.5rem;
 }
 
 .calculator-container {
@@ -23,7 +30,6 @@ body {
 
 .display-container p {
   margin: 0;
-  font-size: 24px;
 }
 
 .buttons-container {
@@ -52,6 +58,7 @@ button:hover {
 .clear-btn {
   background-color: hsl(1, 79%, 45%);
   color: #ffffff;
+  grid-column: span 3;
 }
 
 .equal-btn:hover {
@@ -60,4 +67,8 @@ button:hover {
 
 .clear-btn:hover {
   background-color: hsl(1, 79%, 25%);
+}
+
+.zero-btn {
+  grid-column: span 2;
 }
