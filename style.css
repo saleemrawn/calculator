@@ -11,6 +11,7 @@ body {
 .display-container {
   display: flex;
   justify-content: right;
+  align-items: center;
   gap: 8px;
   height: 64px;
   box-sizing: border-box;
