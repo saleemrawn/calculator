@@ -36,3 +36,19 @@ function clearCalcDisplay() {
   const calcDisplay = document.querySelector(".display-container");
   calcDisplay.innerHTML = "";
 }
+
+function resetFirstNumber() {
+  firstNum = "";
+}
+
+function resetSecondNumber() {
+  secondNum = "";
+}
+
+function resetOperator() {
+  operator = "";
+}
+
+function resetTotal() {
+  total = 0;
+}
