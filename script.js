@@ -112,3 +112,40 @@ function handleNewDigitEvent(value) {
   clearCalcDisplay();
   updateCalcDisplay(firstNum, operator, secondNum);
 }
+
+function attachEventListeners() {
+  const numberBtns = document.querySelectorAll(".number-btn");
+  const operatorBtns = document.querySelectorAll(".operator-btn");
+  const clearBtn = document.querySelector(".clear-btn");
+  const equalBtn = document.querySelector(".equal-btn");
+
+  numberBtns.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      const buttonValue = event.target.innerText;
+
+      if (firstNum === "" && operator === "" && secondNum === "") return setFirstNumber(buttonValue);
+      if (firstNum !== "" && operator !== "") return setSecondNumber(buttonValue);
+      if (total > 0 && secondNum === "") return handleNewDigitEvent(buttonValue);
+    });
+  });
+
+  operatorBtns.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      const buttonValue = event.target.innerText;
+      if (firstNum !== "" && secondNum === "") return setOperator(buttonValue);
+    });
+  });
+
+  clearBtn.addEventListener("click", () => {
+    clearCalcDisplay();
+    resetFirstNumber();
+    resetSecondNumber();
+    resetOperator();
+  });
+
+  equalBtn.addEventListener("click", () => {
+    if (firstNum !== "" && operator !== "" && secondNum !== "") handleEqualsEvent();
+  });
+}
+
+attachEventListeners();
