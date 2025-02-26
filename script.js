@@ -84,3 +84,22 @@ function setOperator(value) {
   clearCalcDisplay();
   updateCalcDisplay(firstNum, operator, secondNum);
 }
+
+function handleEqualsEvent() {
+  clearCalcDisplay();
+
+  if (Number.isNaN(total) || Number.isFinite(total)) return updateCalcDisplay("Sorry, you can't divide by 0.");
+
+  total = operate(
+    operator,
+    firstNum % 2 === 0 ? Number.parseInt(firstNum) : Number.parseFloat(firstNum),
+    secondNum % 2 === 0 ? Number.parseInt(secondNum) : Number.parseFloat(secondNum)
+  );
+
+  let roundedTotal = total % 2 === 0 ? total : Math.round(total * 10000000000) / 10000000000;
+
+  updateFirstNumberValue(roundedTotal.toString());
+  resetSecondNumber();
+  resetOperator();
+  updateCalcDisplay(roundedTotal);
+}
