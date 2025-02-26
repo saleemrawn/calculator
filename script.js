@@ -52,3 +52,17 @@ function resetOperator() {
 function resetTotal() {
   total = 0;
 }
+
+function updateFirstNumberValue(value, concatenate = false) {
+  if (concatenate) return (firstNum += value);
+  return (firstNum = value);
+}
+
+function updateSecondNumberValue(value, concatenate = false) {
+  if (concatenate) return (secondNum += value);
+  return (secondNum = value);
+}
+
+function updateOperatorValue(value) {
+  operator = value;
+}
