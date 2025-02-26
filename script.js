@@ -85,6 +85,14 @@ function setOperator(value) {
   updateCalcDisplay(firstNum, operator, secondNum);
 }
 
+function enableButton(button) {
+  button.removeAttribute("disabled");
+}
+
+function disableButton(button) {
+  button.setAttribute("disabled", "");
+}
+
 function handleEqualsEvent() {
   clearCalcDisplay();
 
@@ -125,6 +133,7 @@ function attachEventListeners() {
   const operatorBtns = document.querySelectorAll(".operator-btn");
   const clearBtn = document.querySelector(".clear-btn");
   const equalBtn = document.querySelector(".equal-btn");
+  const decimalBtn = document.querySelector(".decimal-btn");
 
   numberBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {
@@ -140,12 +149,14 @@ function attachEventListeners() {
   operatorBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {
       const buttonValue = event.target.innerText;
-      if (firstNum !== "" && secondNum === "") return setOperator(buttonValue);
+      if (firstNum !== "" && secondNum === "") setOperator(buttonValue);
+      enableButton(decimalBtn);
     });
   });
 
   clearBtn.addEventListener("click", () => {
     clearCalcDisplay();
+    enableButton(decimalBtn);
     resetFirstNumber();
     resetSecondNumber();
     resetOperator();
@@ -153,6 +164,26 @@ function attachEventListeners() {
 
   equalBtn.addEventListener("click", () => {
     if (firstNum !== "" && operator !== "" && secondNum !== "") handleEqualsEvent();
+  });
+
+  decimalBtn.addEventListener("click", (event) => {
+    const buttonValue = event.target.innerText;
+
+    if (firstNum !== "" && operator === "" && secondNum === "") {
+      updateFirstNumberValue(buttonValue, true);
+      disableButton(decimalBtn);
+      clearCalcDisplay();
+      updateCalcDisplay(firstNum, operator, secondNum);
+      return;
+    }
+
+    if (firstNum !== "" && operator !== "") {
+      updateSecondNumberValue(buttonValue, true);
+      disableButton(decimalBtn);
+      clearCalcDisplay();
+      updateCalcDisplay(firstNum, operator, secondNum);
+      return;
+    }
   });
 }
 
