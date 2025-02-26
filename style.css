@@ -52,6 +52,7 @@ button:hover {
 .clear-btn {
   background-color: hsl(1, 79%, 45%);
   color: #ffffff;
+  grid-column: span 3;
 }
 
 .equal-btn:hover {
@@ -60,4 +61,8 @@ button:hover {
 
 .clear-btn:hover {
   background-color: hsl(1, 79%, 25%);
+}
+
+.zero-btn {
+  grid-column: span 2;
 }
