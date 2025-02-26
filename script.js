@@ -123,9 +123,10 @@ function attachEventListeners() {
     btn.addEventListener("click", (event) => {
       const buttonValue = event.target.innerText;
 
+      if (total > 0 && operator === "" && secondNum === "") return handleNewDigitEvent(buttonValue);
       if (firstNum === "" && operator === "" && secondNum === "") return setFirstNumber(buttonValue);
+      if (firstNum !== "" && operator === "" && secondNum === "") return setFirstNumber(buttonValue);
       if (firstNum !== "" && operator !== "") return setSecondNumber(buttonValue);
-      if (total > 0 && secondNum === "") return handleNewDigitEvent(buttonValue);
     });
   });
 
