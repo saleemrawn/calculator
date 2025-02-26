@@ -66,3 +66,21 @@ function updateSecondNumberValue(value, concatenate = false) {
 function updateOperatorValue(value) {
   operator = value;
 }
+
+function setFirstNumber(value) {
+  updateFirstNumberValue(value, true);
+  clearCalcDisplay();
+  updateCalcDisplay(firstNum, operator, secondNum);
+}
+
+function setSecondNumber(value) {
+  updateSecondNumberValue(value, true);
+  clearCalcDisplay();
+  updateCalcDisplay(firstNum, operator, secondNum);
+}
+
+function setOperator(value) {
+  updateOperatorValue(value, true);
+  clearCalcDisplay();
+  updateCalcDisplay(firstNum, operator, secondNum);
+}
