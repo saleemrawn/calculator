@@ -88,7 +88,14 @@ function setOperator(value) {
 function handleEqualsEvent() {
   clearCalcDisplay();
 
-  if (Number.isNaN(total) || !Number.isFinite(total)) return updateCalcDisplay("Sorry, you can't divide by 0.");
+  if (operator === "÷" && (firstNum === "0" || secondNum === "0")) {
+    resetFirstNumber();
+    resetSecondNumber();
+    resetOperator();
+    resetTotal();
+    updateCalcDisplay("Sorry, you can't divide by 0.");
+    return;
+  }
 
   total = operate(
     operator,
