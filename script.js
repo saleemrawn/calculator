@@ -103,3 +103,12 @@ function handleEqualsEvent() {
   resetOperator();
   updateCalcDisplay(roundedTotal);
 }
+
+function handleNewDigitEvent(value) {
+  updateFirstNumberValue(value);
+  resetTotal();
+  resetSecondNumber();
+  resetOperator();
+  clearCalcDisplay();
+  updateCalcDisplay(firstNum, operator, secondNum);
+}
