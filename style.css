@@ -44,7 +44,7 @@ button:hover {
   cursor: pointer;
 }
 
-.equals-btn {
+.equal-btn {
   background-color: hsl(120, 100%, 25%);
   color: #ffffff;
 }
@@ -54,7 +54,7 @@ button:hover {
   color: #ffffff;
 }
 
-.equals-btn:hover {
+.equal-btn:hover {
   background-color: hsl(120, 100%, 15%);
 }
 
