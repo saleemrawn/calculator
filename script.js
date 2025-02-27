@@ -94,6 +94,8 @@ function disableButton(button) {
 }
 
 function handleEqualsEvent() {
+  if (firstNum === "" || operator === "" || secondNum === "") return -1;
+
   clearCalcDisplay();
 
   if (operator === "÷" && (firstNum === "0" || secondNum === "0")) {
