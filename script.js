@@ -128,6 +128,26 @@ function handleNewDigitEvent(value) {
   updateCalcDisplay(firstNum, operator, secondNum);
 }
 
+function handleBackspaceEvent() {
+  if (firstNum !== "" && operator === "") {
+    firstNum = firstNum.substring(0, firstNum.length - 1);
+    clearCalcDisplay();
+    updateCalcDisplay(firstNum, operator, secondNum);
+  }
+
+  if (operator !== "" && secondNum === "") {
+    resetOperator();
+    clearCalcDisplay();
+    updateCalcDisplay(firstNum, operator, secondNum);
+  }
+
+  if (secondNum !== "") {
+    secondNum = secondNum.substring(0, secondNum.length - 1);
+    clearCalcDisplay();
+    updateCalcDisplay(firstNum, operator, secondNum);
+  }
+}
+
 function attachEventListeners() {
   const numberBtns = document.querySelectorAll(".number-btn");
   const operatorBtns = document.querySelectorAll(".operator-btn");
@@ -135,6 +155,73 @@ function attachEventListeners() {
   const equalBtn = document.querySelector(".equal-btn");
   const decimalBtn = document.querySelector(".decimal-btn");
 
+  /* [START] Keydown Events */
+  document.addEventListener("keydown", (event) => {
+    event.preventDefault();
+
+    if (total > 0 && operator === "" && secondNum === "" && event.code === `Digit${event.key}`)
+      return handleNewDigitEvent(event.key);
+
+    if (
+      (firstNum === "" && operator === "" && event.code === `Digit${event.key}`) ||
+      (firstNum !== "" && operator === "" && secondNum === "" && event.code === `Digit${event.key}`)
+    )
+      return setFirstNumber(event.key);
+
+    if (firstNum !== "" && operator !== "" && event.code === `Digit${event.key}`) return setSecondNumber(event.key);
+
+    if (firstNum !== "" && secondNum === "" && (event.code === "Slash" || event.code === "NumpadDivide"))
+      return setOperator("÷");
+
+    if (
+      firstNum !== "" &&
+      secondNum === "" &&
+      ((event.shiftKey && event.code === "Equal") || event.code === "NumpadAdd")
+    )
+      return setOperator("+");
+
+    if (
+      firstNum !== "" &&
+      secondNum === "" &&
+      ((event.shiftKey && event.code === "Digit8") || event.code === "NumpadMultiply")
+    )
+      return setOperator("×");
+
+    if (firstNum !== "" && secondNum === "" && event.code === "Minus") return setOperator("–");
+
+    if (event.code === "Period" || event.code === "NumpadDecimal") {
+      if (firstNum !== "" && operator === "" && secondNum === "") {
+        updateFirstNumberValue(event.key, true);
+        disableButton(decimalBtn);
+        clearCalcDisplay();
+        updateCalcDisplay(firstNum, operator, secondNum);
+        return;
+      }
+
+      if (firstNum !== "" && operator !== "") {
+        updateSecondNumberValue(event.key, true);
+        disableButton(decimalBtn);
+        clearCalcDisplay();
+        updateCalcDisplay(firstNum, operator, secondNum);
+        return;
+      }
+    }
+
+    if (event.code === "Enter" || event.code === "NumpadEnter" || event.code === "Equal") return handleEqualsEvent();
+
+    if (event.code === "KeyC") {
+      clearCalcDisplay();
+      resetFirstNumber();
+      resetOperator();
+      resetSecondNumber();
+      resetTotal;
+    }
+
+    if (event.code === "Backspace" || event.code === "Delete") return handleBackspaceEvent();
+  });
+  /* [END] Keydown Events */
+
+  /* [START] Click Events */
   numberBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {
       const buttonValue = event.target.innerText;
@@ -185,6 +272,7 @@ function attachEventListeners() {
       return;
     }
   });
+  /* [END] Click Events */
 }
 
 attachEventListeners();
