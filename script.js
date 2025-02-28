@@ -79,7 +79,7 @@ function setSecondNumber(value) {
   updateCalcDisplay(firstNum, operator, secondNum);
 }
 
-function setOperator(value) {
+function handleOperatorEvent(value) {
   updateOperatorValue(value, true);
   clearCalcDisplay();
   updateCalcDisplay(firstNum, operator, secondNum);
@@ -204,24 +204,23 @@ function attachEventListeners() {
     if (firstNum !== "" && operator !== "" && event.code === `Digit${event.key}`) return setSecondNumber(event.key);
 
     if (firstNum !== "" && secondNum === "" && (event.code === "Slash" || event.code === "NumpadDivide"))
-      return setOperator("÷");
+      return handleOperatorEvent("÷");
 
     if (
       firstNum !== "" &&
       secondNum === "" &&
       ((event.shiftKey && event.code === "Equal") || event.code === "NumpadAdd")
     )
-      return setOperator("+");
+      return handleOperatorEvent("+");
 
     if (
       firstNum !== "" &&
       secondNum === "" &&
       ((event.shiftKey && event.code === "Digit8") || event.code === "NumpadMultiply")
     )
-      return setOperator("×");
+      return handleOperatorEvent("×");
 
-    if (firstNum !== "" && secondNum === "" && event.code === "Minus") return setOperator("–");
-
+    if (firstNum !== "" && secondNum === "" && event.code === "Minus") return handleOperatorEvent("–");
     if (event.code === "Period" || event.code === "NumpadDecimal") return handleDecimalEvent(event.key);
     if (event.code === "Enter" || event.code === "NumpadEnter" || event.code === "Equal") return handleEqualsEvent();
     if (event.code === "KeyC") return handleClearEvent();
@@ -244,7 +243,7 @@ function attachEventListeners() {
   operatorBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {
       const buttonValue = event.target.innerText;
-      if (firstNum !== "" && secondNum === "") setOperator(buttonValue);
+      if (firstNum !== "" && secondNum === "") handleOperatorEvent(buttonValue);
       enableButton(decimalBtn);
     });
   });
