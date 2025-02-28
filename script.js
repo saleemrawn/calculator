@@ -150,6 +150,26 @@ function handleBackspaceEvent() {
   }
 }
 
+function handleDecimalEvent(eventValue) {
+  const decimalBtn = document.querySelector(".decimal-btn");
+
+  if (firstNum !== "" && operator === "" && secondNum === "") {
+    updateFirstNumberValue(eventValue, true);
+    disableButton(decimalBtn);
+    clearCalcDisplay();
+    updateCalcDisplay(firstNum, operator, secondNum);
+    return;
+  }
+
+  if (firstNum !== "" && operator !== "") {
+    updateSecondNumberValue(eventValue, true);
+    disableButton(decimalBtn);
+    clearCalcDisplay();
+    updateCalcDisplay(firstNum, operator, secondNum);
+    return;
+  }
+}
+
 function attachEventListeners() {
   const numberBtns = document.querySelectorAll(".number-btn");
   const operatorBtns = document.querySelectorAll(".operator-btn");
@@ -191,24 +211,7 @@ function attachEventListeners() {
 
     if (firstNum !== "" && secondNum === "" && event.code === "Minus") return setOperator("–");
 
-    if (event.code === "Period" || event.code === "NumpadDecimal") {
-      if (firstNum !== "" && operator === "" && secondNum === "") {
-        updateFirstNumberValue(event.key, true);
-        disableButton(decimalBtn);
-        clearCalcDisplay();
-        updateCalcDisplay(firstNum, operator, secondNum);
-        return;
-      }
-
-      if (firstNum !== "" && operator !== "") {
-        updateSecondNumberValue(event.key, true);
-        disableButton(decimalBtn);
-        clearCalcDisplay();
-        updateCalcDisplay(firstNum, operator, secondNum);
-        return;
-      }
-    }
-
+    if (event.code === "Period" || event.code === "NumpadDecimal") return handleDecimalEvent(event.key);
     if (event.code === "Enter" || event.code === "NumpadEnter" || event.code === "Equal") return handleEqualsEvent();
 
     if (event.code === "KeyC") {
@@ -257,22 +260,7 @@ function attachEventListeners() {
 
   decimalBtn.addEventListener("click", (event) => {
     const buttonValue = event.target.innerText;
-
-    if (firstNum !== "" && operator === "" && secondNum === "") {
-      updateFirstNumberValue(buttonValue, true);
-      disableButton(decimalBtn);
-      clearCalcDisplay();
-      updateCalcDisplay(firstNum, operator, secondNum);
-      return;
-    }
-
-    if (firstNum !== "" && operator !== "") {
-      updateSecondNumberValue(buttonValue, true);
-      disableButton(decimalBtn);
-      clearCalcDisplay();
-      updateCalcDisplay(firstNum, operator, secondNum);
-      return;
-    }
+    handleDecimalEvent(buttonValue);
   });
   /* [END] Click Events */
 }
