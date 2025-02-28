@@ -67,7 +67,7 @@ function updateOperatorValue(value) {
   operator = value;
 }
 
-function setFirstNumber(value) {
+function handleFirstNumberEvent(value) {
   updateFirstNumberValue(value, true);
   clearCalcDisplay();
   updateCalcDisplay(firstNum, operator, secondNum);
@@ -199,7 +199,7 @@ function attachEventListeners() {
       (firstNum === "" && operator === "" && event.code === `Digit${event.key}`) ||
       (firstNum !== "" && operator === "" && secondNum === "" && event.code === `Digit${event.key}`)
     )
-      return setFirstNumber(event.key);
+      return handleFirstNumberEvent(event.key);
 
     if (firstNum !== "" && operator !== "" && event.code === `Digit${event.key}`) return setSecondNumber(event.key);
 
@@ -234,8 +234,8 @@ function attachEventListeners() {
       const buttonValue = event.target.innerText;
 
       if (total > 0 && operator === "" && secondNum === "") return handleNewDigitEvent(buttonValue);
-      if (firstNum === "" && operator === "" && secondNum === "") return setFirstNumber(buttonValue);
-      if (firstNum !== "" && operator === "" && secondNum === "") return setFirstNumber(buttonValue);
+      if (firstNum === "" && operator === "" && secondNum === "") return handleFirstNumberEvent(buttonValue);
+      if (firstNum !== "" && operator === "" && secondNum === "") return handleFirstNumberEvent(buttonValue);
       if (firstNum !== "" && operator !== "") return setSecondNumber(buttonValue);
     });
   });
