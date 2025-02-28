@@ -150,6 +150,17 @@ function handleBackspaceEvent() {
   }
 }
 
+function handleClearEvent() {
+  const decimalBtn = document.querySelector(".decimal-btn");
+
+  clearCalcDisplay();
+  enableButton(decimalBtn);
+  resetFirstNumber();
+  resetOperator();
+  resetSecondNumber();
+  resetTotal;
+}
+
 function handleDecimalEvent(eventValue) {
   const decimalBtn = document.querySelector(".decimal-btn");
 
@@ -213,15 +224,7 @@ function attachEventListeners() {
 
     if (event.code === "Period" || event.code === "NumpadDecimal") return handleDecimalEvent(event.key);
     if (event.code === "Enter" || event.code === "NumpadEnter" || event.code === "Equal") return handleEqualsEvent();
-
-    if (event.code === "KeyC") {
-      clearCalcDisplay();
-      resetFirstNumber();
-      resetOperator();
-      resetSecondNumber();
-      resetTotal;
-    }
-
+    if (event.code === "KeyC") return handleClearEvent();
     if (event.code === "Backspace" || event.code === "Delete") return handleBackspaceEvent();
   });
   /* [END] Keydown Events */
@@ -246,13 +249,7 @@ function attachEventListeners() {
     });
   });
 
-  clearBtn.addEventListener("click", () => {
-    clearCalcDisplay();
-    enableButton(decimalBtn);
-    resetFirstNumber();
-    resetSecondNumber();
-    resetOperator();
-  });
+  clearBtn.addEventListener("click", () => handleClearEvent());
 
   equalBtn.addEventListener("click", () => {
     if (firstNum !== "" && operator !== "" && secondNum !== "") handleEqualsEvent();
