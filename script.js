@@ -163,7 +163,7 @@ function handleClearEvent() {
   resetFirstNumber();
   resetOperator();
   resetSecondNumber();
-  resetTotal;
+  resetTotal();
 }
 
 function handleDecimalEvent(eventValue) {
