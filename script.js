@@ -164,6 +164,9 @@ function handleClearEvent() {
 function handleDecimalEvent(eventValue) {
   const decimalBtn = document.querySelector(".decimal-btn");
 
+  if (firstNum.includes(".") && operator === "") return;
+  if (secondNum.includes(".") && operator !== "") return;
+
   if (firstNum !== "" && operator === "" && secondNum === "") {
     updateFirstNumberValue(eventValue, true);
     disableButton(decimalBtn);
