@@ -80,9 +80,11 @@ function handleSecondNumberEvent(value) {
 }
 
 function handleOperatorEvent(value) {
+  const decimalBtn = document.querySelector(".decimal-btn");
   updateOperatorValue(value, true);
   clearCalcDisplay();
   updateCalcDisplay(firstNum, operator, secondNum);
+  enableButton(decimalBtn);
 }
 
 function enableButton(button) {
@@ -94,6 +96,8 @@ function disableButton(button) {
 }
 
 function handleEqualsEvent() {
+  const decimalBtn = document.querySelector(".decimal-btn");
+
   if (firstNum === "" || operator === "" || secondNum === "") return -1;
 
   clearCalcDisplay();
@@ -119,6 +123,7 @@ function handleEqualsEvent() {
   resetSecondNumber();
   resetOperator();
   updateCalcDisplay(roundedTotal);
+  enableButton(decimalBtn);
 }
 
 function handleNewDigitEvent(value) {
